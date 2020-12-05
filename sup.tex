@@ -1,0 +1,719 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{simplewick}
+\usepackage{graphicx}
+\usepackage{appendix}
+\usepackage[backend=biber,style=nature]{biblatex}
+\addbibresource{library.bib}
+\usepackage[margin=1.6in]{geometry}
+
+\usepackage[affil-it]{authblk} 
+\usepackage{etoolbox}
+\usepackage{lmodern}
+
+\usepackage{xr}
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}
+  \@addtofilelist{#1}
+  \IfFileExists{#1}{}{\typeout{No file #1.}}
+}
+\makeatother
+ 
+\newcommand*{\myexternaldocument}[1]{%
+    \externaldocument{#1}%
+    \addFileDependency{#1.tex}%
+    \addFileDependency{#1.aux}%
+}
+\myexternaldocument{main}
+
+\makeatletter
+\patchcmd{\@maketitle}{\LARGE \@title}{\fontsize{16}{19.2}\selectfont\@title}{}{}
+\makeatother
+
+\renewcommand\Authfont{\fontsize{12}{14.4}\selectfont}
+\renewcommand\Affilfont{\fontsize{9}{10.8}\itshape}
+
+% \title{Simulation of TEM-induced electronic excitation in crystalline solids}
+\title{\textbf{Supplementary Information:\\Electron beam-induced excitation rates in crystalline solids from first-principles}}
+\author[1,2]{Anthony Yoshimura}
+\author[2]{Michael Lamparski}
+\author[2]{Joel Giedt}
+\author[3]{David Lingerfelt}
+\author[3]{Jacek Jakowski}
+\author[3]{Ganesh Panchapakesan}
+\author[4]{Tao Yu}
+\author[4]{\\Bobby Sumpter}
+\author[2,5*]{Vincent Meunier}
+\affil[1]{Design Physics Division, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA}
+\affil[2]{Department of Physics, Applied Physics, and Astronomy, Rensselaer Polytechnic Institute, Troy, New York 12180, USA}
+\affil[3]{Computational Sciences and Engineering Division, Oak Ridge National Laboratory, Oak Ridge, TN 37831, USA}
+\affil[4]{Department of Chemistry, University of North Dakota, Grand Forks, ND 58202, USA}
+\affil[5]{Department of Materials Science and Engineering, Rensselaer Polytechnic Institute, Troy, NY 12180, USA}
+\affil[*]{Correspondence to be addressed to meuniv@rpi.edu}
+
+\renewcommand{\thefigure}{S\arabic{figure}}  % add "S" to the beginning of figure labels
+\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thesection}{S\arabic{section}}
+% \appendix
+% \numberwithin{equation}{section}
+% \renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+\begin{document}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{To Do List}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+    \item convergence plots and description
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The invariant matrix element}
+\label{app:M}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As the excitation amplitude in equation (\ref{eq:ampCode}) takes the invariant matrix element $\mathcal{M}$ and not $|\mathcal{M}|^2$, we are unable to use spin sums identities typically used to derive many QED cross sections \cite{Peskin1995, Lancaster2014}.  To this end, the Mathematica notebook included in the supplementary materials yields
+
+\begin{enumerate}
+    \item Dirac basis (spinors)
+    \item gamma matrices
+\end{enumerate}
+
+\begin{equation}
+\begin{aligned}
+\mathcal{M}(p_4p_3\leftarrow p_2p_1)
+&=
+-\frac{2e^2}{(p_3 - p_2)^2}
+\\&\times
+\big[(\epsilon_1 + m)(\epsilon_2 + m)(\epsilon_3 + m)(\epsilon_4 + m)\big]^{-1/2}
+\\&\times\Big\{
+    (\epsilon_1 + m)\big[(\epsilon_3 + m)p^x_2 + (\epsilon_2 + m) p^x_3\big]p^x_4
+    \\&\qquad+
+    \big[(\epsilon_3 + m)(p^y_2 + ip^z_2) + (\epsilon_2 + m)(p^y_3 - ip^z_3)\big]
+        \\&\qquad\qquad\times
+        \big[i(\epsilon_4 + m)p^z_1 + (\epsilon_1 + m)(p^y_4 - ip^z_4)\big]
+    \\&\qquad-
+    \big[(\epsilon_2 + m)(\epsilon_3 + m) + p^x_2p^x_3
+        + (p^y_2 + ip^z_2)( p^y_3 - ip^z_3)\big]
+        \\&\qquad\qquad\times
+        \big[(\epsilon_1 + m) (\epsilon_4 + m) + p^z_1(ip^y_4 + p^z_4)\big] 
+    \\&\qquad+
+    \big[(\epsilon_3 + m)(-ip^y_2 + p^z_2) + (\epsilon_2 + m)(ip^y_3 + p^z_3)\big]
+        \\&\qquad\qquad\times
+    \big[(\epsilon_4 + m)p^z_1 + (\epsilon_1 + m)(ip^y_4 + p^z_4)\big]
+\Big\}.
+\end{aligned}
+\end{equation}
+
+
+%------------------------------- Normalization ---------------------------------
+\section{The interaction Hamiltonian and the scattering operator}
+\label{app:S}
+%-------------------------------------------------------------------------------
+
+For the case of electron beam-matter scattering, the probability of a particular scattering event can be calculated by taking the time-evolution of the incident electron state(s) in the presence of the electromagnetic field interaction and determining overlap of the time-evolved state(s) with the final state(s) of interest. In the interaction picture of quantum mechanics, this time-evolution is governed by the interaction term in the Hamiltonian \cite{Sakurai2011}.  We therefore begin this chapter by deriving this term.  As a starting point, assuming units in which $\hbar = c = 1$, the noninteracting Lagrangian density of the electromagnetic and electron fields is
+
+\begin{equation}
+\label{eq:nonIntL}
+    \hat{\mathcal{L}}
+    =
+    -\frac{1}{4}\hat{F}_{\mu\nu}\hat{F}^{\mu\nu}
+    +
+    \hat{\bar{\psi}}(i\gamma^\mu \partial_\mu - m)\hat{\psi},
+\end{equation}
+%
+where the electromagnetic vector field operator can be expressed as
+
+\begin{equation}
+    \hat{A}_\mu(x)
+    =
+    \int\frac{d^3q}{(2\pi)^{3/2}}\frac{1}{(2E_\mathbf{q})^{1/2}}
+    \sum_{\lambda=1}^2
+    \left(
+    \hat{c}_{\lambda\mathbf{q}}\epsilon^\lambda_\mu(q)e^{-iq\cdot x}
+    +
+    \hat{c}^\dag_{\lambda\mathbf{q}}\epsilon^{\lambda*}_\mu(q)e^{iq\cdot x}
+    \right),
+\end{equation}
+%
+where $E_\mathbf{q}^2 = |\mathbf{q}|^2$, $\epsilon^\lambda_\mu$ are the polarization vectors for polarizations $\lambda=1$ or 2, and the raising and lower operators obey the commutation relations
+
+\begin{equation}
+    [\hat{c}_{\lambda\mathbf{p}}, \hat{c}^\dag_{\lambda'\mathbf{p}'}]
+    =
+    \delta(\mathbf{p} - \mathbf{p'})\delta_{\lambda\lambda'}.
+\end{equation}
+%
+With this, the electromagnetic tensor field operator is
+
+\begin{equation}
+    \hat{F}_{\mu\nu} = (\partial_\mu \hat{A}_\nu - \partial_\nu \hat{A}_\mu).
+\end{equation}
+%
+In the electron term, the $\gamma^\mu$ matrices are a set of $4\times4$ matrices that satisfy the anticommutation relations
+
+\begin{equation}
+    \{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu},
+\end{equation}
+%
+where $g^{\mu\nu}$ is the metric tensor of Minkowski, so that
+
+\begin{equation}
+    g^{\mu\nu} 
+    =
+    \mqty(
+    1&0&0&0\\
+    0&-1&0&0\\
+    0&0&-1&0\\
+    0&0&0&-1
+    ).
+\end{equation}
+%
+Further, the electron spinor field operators can be expressed as
+
+\begin{equation}
+\label{eq:electronField}
+\begin{aligned}
+    &\hat{\psi}(x)
+    =
+    \int\frac{d^3p}{(2\pi)^{3/2}}\frac{1}{(2\epsilon_\mathbf{p})^{1/2}}
+    \sum_{s=1}^2
+    \left(
+    \hat{a}_{s\mathbf{p}}u^s(p)e^{-ip\cdot x}
+    +
+    \hat{b}^\dag_{s\mathbf{p}} v^s(p)e^{ip\cdot x}
+    \right)
+    \\&\hat{\bar{\psi}}(x)
+    =
+    \int\frac{d^3p}{(2\pi)^{3/2}}\frac{1}{(2\epsilon_\mathbf{p})^{1/2}}
+    \sum_{s=1}^2
+    \left(
+    \hat{a}^\dag_{s\mathbf{p}} \bar{u}^s(p)e^{-ip\cdot x}
+    +
+    \hat{b}_{s\mathbf{p}} \bar{v}^s(p)e^{ip\cdot x}
+\right),
+\end{aligned}
+\end{equation}
+%
+where $\epsilon_\mathbf{p} = |\mathbf{p}|^2 + m^2$, $u^s(p)$ and $v^s(p)$ are spinors for spin component $s$, $\bar{u}(p) = u^\dag(p)\gamma^0$, and the raising and lowering operators obey the anticommutation relations
+
+\begin{equation}
+    \{\hat{a}_{s\mathbf{p}}, \hat{a}^\dag_{r\mathbf{q}}\}
+    =
+    \{\hat{b}_{s\mathbf{p}}, \hat{b}^\dag_{r\mathbf{q}}\}
+    =
+    \delta(\mathbf{p} - \mathbf{q})\delta_{sr}.
+\end{equation}
+%
+As written, both fields in equation (\ref{eq:nonIntL}) are and will always be completely stationary. Any dynamics in these fields require addition of an interaction term in the Lagrangian density.  The precise form of this term follows directly from gauge invariance.  We know that electromagnetism is gauge invariant, in that changes to the vector field of the form
+
+\begin{equation}
+\label{eq:emGauge}
+    A_\mu \rightarrow A_\mu-q^{-1}\partial_\mu \alpha(x)
+    \quad
+    \Rightarrow
+    \quad
+    F_{\mu\nu} \rightarrow F_{\mu\nu}
+\end{equation}
+%
+leave the tensor field unchanged.  As the tensor field is what is actually measured, there should be no way to experimentally detect a change of this form in the vector field.  With that said, we know from the Aharonov-Bohm effect \cite{Aharonov1959} that the transformation in (\ref{eq:emGauge}) results in a local phase change to the electron field, specifically
+
+\begin{equation}
+    \label{eq:aharonov}
+    \psi\rightarrow\psi e^{i\alpha(x)}.
+\end{equation}
+%
+(Note the fact that a charged field must transform like this guarantees that it is complex).  Thus, for our theory to remain gauge invariant, it follows that the Lagrangian in equation (\ref{eq:nonIntL}) must be invariant to both (\ref{eq:emGauge}) and (\ref{eq:aharonov}).
+With this provision, let us check if the noninteracting Lagrangian as written in equation (\ref{eq:nonIntL}) is indeed gauge invariant.  Clearly, relation (\ref{eq:emGauge}) states that the electromagnetic term remains unchanged.  Meanwhile, to check the electron term, we can multiply out the contents in parenthesis and check the two terms individually.  While it is easy to see that mass term is gauge invariant, the derivative term is not, in that
+
+\begin{equation}
+\label{eq:derTerm}
+    \bar{\psi}\partial_\mu\psi
+    \rightarrow
+    \bar{\psi}\partial_\mu\psi + i\bar{\psi}\psi\partial_\mu\alpha(x)
+    \neq
+    \bar{\psi}\partial_\mu\psi.
+\end{equation}
+%
+Therefore, a term must be added to equation (\ref{eq:nonIntL}) to make it gauge invariant.  The hope is that this term, when transformed by (\ref{eq:emGauge}), will cancel the extra term containing $\alpha(x)$ in (\ref{eq:derTerm}).  For this, we can replace the derivative with a covariant derivative
+
+\begin{equation}
+    \label{eq:covDer}
+    D_\mu = \partial_\mu + iqA_\mu.
+\end{equation}
+%
+In doing so, the electron term in the Lagrangian now gauge transforms like
+
+\begin{equation}
+    \begin{aligned}
+\bar{\psi}D_\mu\psi
+&=
+\bar{\psi}\partial_\mu\psi + iq\bar{\psi}A_\mu\psi
+\\&\rightarrow
+\bar{\psi}\partial_\mu\psi + i\bar{\psi}\psi\partial_\mu\alpha
++
+iq\bar{\psi}A_\mu\psi - i\bar{\psi}\psi\partial_\mu\alpha
+\\&=
+\bar{\psi}\partial_\mu\psi + iq\bar{\psi}A_\mu\psi
+=
+\bar{\psi}D_\mu\psi.
+\end{aligned}
+\end{equation}
+%
+Thus, we see that replacing the derivative with the covariant derivative makes the Lagrangian gauge invariant.
+
+If we isolate the change in the Lagrangian density due to the inclusion of the covariant derivative, we obtain the noninteracting Lagrangian density plus an extra term
+
+\begin{equation}
+    \mathcal{L}
+    =
+    -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}
+    +
+    \bar{\psi}(i\gamma^\mu \partial_\mu - m)\psi - q\bar{\psi}\gamma^\mu A_\mu\psi.
+\end{equation}
+%
+In doing so, we see that the last term is the interaction Lagrangian density, the negative of which is the interacting Hamiltonian density
+
+\begin{equation}
+    \label{eq:Hi}
+    \hat{\mathcal{H}}_I = q\hat{\bar{\psi}}\gamma^\mu \hat{A}_\mu\hat{\psi},
+\end{equation}
+%
+where we now interpret $q$ as the electromagnetic charge.  As stated before, in the interaction picture, the interacting Hamiltonian dictates how quantum states evolve in time through the time-evolution operator
+
+\begin{equation}
+    \label{eq:S}
+    \hat{S}=T\left[\exp\left(-i\int d^4x\hat{\mathcal{H}}_I(x)\right)\right],
+\end{equation}
+%
+where $T$ is the time-ordering operator.  This operator is the key ingredient for calculating scattering cross sections, as it allows us to determine the probability amplitude for the evolution of any state into another.
+
+ The amplitude density for two free electrons of momenta $p_1$ and $p_2$ to scatter into states $p_3$ and $p_4$ is given by the sandwiching the scattering operator $\hat{S}$ defined in equation (\ref{eq:S}) between the initial and final free-particle states, so that
+
+\begin{equation}
+\label{eq:SExpansion}
+    \begin{aligned}
+    \bra{p_4 p_3}\hat{S}\ket{p_2p_1}
+    &=
+    \bra{p_4p_3} \ket{p_2p_1}
+    \\&-
+    \frac{1}{2} \int d^4x d^4y
+    \bra{p_4p_3} \hat{\mathcal{H}}_I(x)\hat{\mathcal{H}}_I(y)\ket{p_2p_1}
+    \\&+
+    \mathcal{O}(e^4).
+\end{aligned}
+\end{equation}
+%
+The first term in the expansion describes the case of no interaction between the particles.  Beyond this, Wick's theorem dictates that all odd-order terms vanish.  We therefore use the second order term to approximate the scattering amplitude.
+% Higher order terms are of the order $\mathcal{O}(e^4\ll 1)$ and can be ignored.
+Using the form of the interaction Hamiltonian density in equation (\ref{eq:Hi}), we wish to compute
+
+\begin{equation}
+\label{eq:mollerContraction}
+\begin{aligned}
+    \bra{p_4p_3}&\hat{T}\ket{p_2p_1}
+    \equiv
+    -\frac{1}{2} \int d^4x d^4y
+    \bra{p_4p_3} \hat{\mathcal{H}}_I(x)\hat{\mathcal{H}}_I(y)\ket{p_2p_1}
+    \\&=
+    -\frac{e^2}{2}\int d^4x d^4y
+    \bra{p_4p_3}
+    \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x) \hat{\psi}(x)
+    \hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y) \hat{\psi}(y)
+    \ket{p_2p_1}
+    \\&=
+    e^2\int d^4x d^4y\bigg\{
+    \contraction[1ex]
+        {\langle}{\hat{\bar{p}}_4}{p_3|}{\hat{\bar{\psi}}(x)}
+    \contraction[2ex]
+        {\langle p_4}{\bar{\psi}_3}
+        {|\hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x)\hat{\psi}(x)}
+        {\bar{\hat{\psi}}(y)}
+    \contraction[1ex]
+        {\bra{p_4p_3}
+        \hat{\bar{\psi}}(x)\gamma^\mu}{A_\mu(x)}
+        {\hat{\psi}(x) \hat{\bar{\psi}}(y)\gamma^\nu}{A_\nu(y)}
+    \bcontraction[1ex]
+        {\bra{p_4p_3}
+        \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x)}{\hat{\psi}(}
+        {x)\hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y) \hat{\psi}(y)||p_2}
+        {p}
+    \contraction[1ex]
+        {\bra{p_4p_3}
+        \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x) \hat{\psi}(x)
+        \hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y)}{\hat{w}(y)}
+        {}{|p_2}
+    \bra{p_4p_3}
+    \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x) \hat{\psi}(x)
+    \hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y) \hat{\psi}(y)
+    \ket{p_2p_1}
+    \\&\qquad\qquad\quad+
+    \contraction[2ex]
+        {\langle}{\hat{\bar{p}}_4} {p_3|
+        \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x) \hat{\psi}(x)}
+        {\hat{\bar{\psi}}(y)}
+    \contraction[1ex]
+        {\langle p_4}{\bar{\psi}_3}{}
+        {|\hat{\bar{\psi}}(x)}
+    \contraction[1ex]
+        {\bra{p_4p_3}
+        \hat{\bar{\psi}}(x)\gamma^\mu}{A_\mu(x)}
+        {\hat{\psi}(x) \hat{\bar{\psi}}(y)\gamma^\nu}{A_\nu(y)}
+    \bcontraction[1ex]
+        {\bra{p_4p_3}
+        \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x)}{\hat{\psi}(}
+        {x)\hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y) \hat{\psi}(y)||p_2}
+        {p}
+    \contraction[1ex]
+        {\bra{p_4p_3}
+        \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x) \hat{\psi}(x)
+        \hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y)}{\hat{w}(y)}
+        {}{|p_2}
+    \bra{p_4p_3}
+    \hat{\bar{\psi}}(x)\gamma^\mu A_\mu(x) \hat{\psi}(x)
+    \hat{\bar{\psi}}(y)\gamma^\nu A_\nu(y) \hat{\psi}(y)
+    \ket{p_2p_1}
+    \bigg\},
+\end{aligned}
+\end{equation}
+%
+
+
+%------------------------------- Normalization ---------------------------------
+\section{Fitting}
+\label{app:fitting}
+%-------------------------------------------------------------------------------
+
+Expanding the product in equation (\ref{eq:fullProb}) gives
+
+\begin{equation}
+\label{eq:expansion}
+\begin{aligned}
+    P(\text{excitation})
+    =
+    1 - \Bigg(1
+    &-
+    \sum_{j_1} P_{j_1}
+    +
+    \frac{1}{2}\sum_{j_1}\sum_{j_2\neq j_1}P_{j_1}P_{j_2}
+    \\&-
+    \frac{1}{3!}\sum_{j_1}\sum_{j_2\neq j_1}
+    \sum_{j_3\neq j_1,j_2}P_{j_1}P_{j_2}P_{j_3}
+    +\dots\Bigg),
+\end{aligned}
+\end{equation}
+%
+where $j_i$ label the possible single particle excitations (e.g., $n\mathbf{k}\rightarrow n'\mathbf{k'}$).
+In the large-crystal limit, the number of states, and thus the number of transitions, is large so that the summations over $j_i$ are approximately equal to one another.  For example,
+
+\begin{equation}
+    \sum_{j_2\neq j_1}P_{j_2}
+    \sim
+    \sum_{j_2}P_{j_2}
+    \equiv
+    S.
+    \end{equation}
+%
+Equation (\ref{eq:expansion}) is therefore asymptotic to
+
+\begin{equation}
+\label{eq:asymPS}
+    P(\text{excitation})
+    \sim
+    1 - \left(
+    1 - S + \frac{1}{2}S^2 - \frac{1}{3!}S^3 + \dots
+    \right)
+    =
+    1 - \sum_l^\infty \frac{(-S)^l}{l!}
+    =
+    1 - e^{-S}.
+\end{equation}
+%
+We calculate the summation $S$ for various k-point densities.  We then fit the $S(N_k)$ to
+
+\begin{equation}
+    S(N_k)
+    =
+    \frac{a}{N_k-b}e^{-cN_k} + S_\infty
+\end{equation}
+%
+where $N_k$ is the number of k-points in the BZ, and $a$, $b$, $c$, and $S_\infty$ are all fitting parameters.  The fitted $S_\infty$ can then be plugged into equation (\ref{eq:asymPS}) to obtain the excitation probability for an infinitely fine k-point mesh.
+
+\begin{equation}
+    \lim_{N_k\rightarrow\infty}P(\text{excitation}) = 1 - e^{S_\infty}
+\end{equation}
+
+The excitation probability given in equation $P(\text{excitation})$ given in equation (\ref{eq:fullProb}) decreases with increasing k-point density.  This is because transitions with $\mathbf{p}_2=\mathbf{p}_3$ are always included in the summation of the probability amplitude in equation (\ref{eq:ampCode}). Because $(p_3-p_2)^2$ appears in the denominator of equation (\ref{eq:ampCode}), the $\mathbf{p}_2=\mathbf{p}_3$ terms are the largest in the summation.  When the k-point density is small, these large terms contribute disproportionately.  Thus, a very fine k-point mesh is required to obtain accurate excitaton probabilities.  In fact, even a $45\times45\times01$ mesh for the hBN BZ did not suffice.  Fortunately, we can extrapolate our k-point dependence to obtain the converged probability.
+
+%------------------------------- Normalization ---------------------------------
+\section{Normalization}
+\label{app:normalization}
+%-------------------------------------------------------------------------------
+
+When integrating over 4-momentum space, we note that Lorentz invariance constrains a particle's 4-momentum to obey $p^2 = m^2$.  It follows that the 4-momentum integration measure $d^4p$ is always multiplied by a delta function $\delta(p^2-m^2)$, i.e.,
+
+\begin{equation}
+    d^4p\delta(p^2 - m^2)\theta(p^0)
+    =
+    \frac{d^4p}{2p^0}\delta(p_0 - \epsilon_\mathbf{p}),
+\end{equation}
+%
+where the Heaviside step function restricts our consideration to particles of positive mass (we note that antiparticles are interpreted as positive mass particles that propagate backwards in time).  With this integration measure, the identity operator can be written as
+
+\begin{equation}
+\label{eq:identity}
+\begin{aligned}
+    \hat{I}
+    &=
+    \int \frac{d^4p}{(2\pi)^4}(2\pi)\delta(p^2 - m^2)\theta(p^0)
+    \ket{p}\bra{p}
+    \\&=
+    \int \frac{d^3p}{(2\pi)^3 2\epsilon_\mathbf{p}}
+    \ket{p}\bra{p}
+    \\&=
+    \int d^3p
+    \ket{\mathbf{p}}\bra{\mathbf{p}}.
+\end{aligned}
+\end{equation}
+%
+The last equality implies that
+
+\begin{equation}
+\label{eq:normalization}
+    \ket{p} = (2\pi)^{3/2}(2\epsilon_\mathbf{p})^{1/2}\ket{\mathbf{p}}.
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wick's Theorem}
+\label{app:wicks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Wick's theorem allows us to express the long strings of time-ordered operators generated from the expansion of the S-matrix in terms of free particle propagators \cite{Lancaster2014, Peskin1995}.  In our study of scattering, for which the initial and final states are chosen to be those of asymptotically noninteracting particles, these strings of operators are sandwiched between momentum eigenstates, and can be written as
+
+\begin{equation}
+    \bra{\mathbf{p}_1, \mathbf{p}_2, ...}
+    T[\hat{A}\hat{B}\hat{C}...]
+    \ket{\mathbf{q}_1, \mathbf{q}_2, ...}
+    =
+    \bra{0}
+    T[
+    \hat{a}_{\mathbf{p}_1}
+    \hat{a}_{\mathbf{p}_2}
+    ...
+    \hat{A}\hat{B}\hat{C}...
+    \hat{a}_{\mathbf{q}_1}^\dag
+    \hat{a}_{\mathbf{q}_2}^\dag
+    ...
+    ]
+    \ket{0}.
+\end{equation}
+%
+The term on the right, being sandwiched by noninteracting vacuum states, is called a vacuum expectation value (VEV).  VEVs of time-ordered operators are at first not easy to solve.  In contrast, the VEVs of normal-ordered operators, in which all creation operators are written to the right of the annihilation operators, are easily shown to be zero. That is,
+
+\begin{equation}
+    \bra{0}
+    N[
+    \hat{a}_{\mathbf{p}_1}
+    \hat{a}_{\mathbf{p}_2}
+    ...
+    \hat{A}\hat{B}\hat{C}...
+    \hat{a}_{\mathbf{q}_1}^\dag
+    \hat{a}_{\mathbf{q}_2}^\dag
+    ...
+    ]
+    \ket{0}
+    =
+    0,
+\end{equation}
+%
+where $N$ is the normal-ordering operator.
+This is because the vacuum ket is preceded by annihilation operators and/or the vacuum bra is superseded by creation operators.  We define the contraction of two operators as 
+
+\begin{equation}
+    \label{eq:contraction}
+    \contraction[1ex]
+        {}{\hat{A}}{}{B}
+        \hat{A}\hat{B}
+    =
+    T[\hat{A}\hat{B}]
+    -
+    N[\hat{A}\hat{B}].
+\end{equation}
+%
+Note that the contraction is a number, not an operator, meaning that the VEV of a contraction is just the contraction itself.
+From equation \ref{eq:contraction}, it can be shown that (see Peskin and Schroeder \cite{Peskin1995})
+
+\begin{equation}
+    T[\hat{A}\hat{B}\hat{C}...]
+    =
+    N[\hat{A}\hat{B}\hat{C}...
+    +
+    \text{all possible contractions of }
+    \hat{A}\hat{B}\hat{C}...].
+\end{equation}
+%
+Taking the VEV of the right side would only leave terms which are fully contracted, in which all operators are contracted with another.  This is becuase any VEV containing uncontracted operators would vanish due to their normal ordering.  Thus, we can see that the VEV of a time-ordered product is the sum of all fully contracted terms.
+
+The scattering amplitude given in equation (\ref{eq:mollerContraction}) contains only two types of contractions.  The first is
+
+\begin{equation}
+\begin{aligned}
+    \contraction[1ex]
+        {\bra{0}}{\hat{\psi}(x)}{}{\ket{p}}
+    \bra{0}\hat{\psi}(x)\ket{p}
+    &=
+    \contraction[1ex]
+        {(2\pi)^{3/2}(2\epsilon_\mathbf{p})^{1/2}\bra{0}}
+        {\hat{\psi}(x)}{}{\hat{a}^\dag}
+    (2\pi)^{3/2}(2\epsilon_\mathbf{p})^{1/2}
+    \bra{0}\hat{\psi}(x)\hat{a}^\dag_{s\mathbf{p}}\ket{0}
+    \\&=
+    (2\pi)^{3/2}(2\epsilon_\mathbf{p})^{1/2}
+    \bra{0}T[\hat{\psi}(x)\hat{a}^\dag_{s'\mathbf{p'}}]\ket{0}
+    \\&=
+    (2\pi)^{3/2}(2\epsilon_\mathbf{p})^{1/2}
+    \bra{0}
+    \int\frac{d^3q}{(2\pi)^{3/2}}
+    \frac{1}{(2\epsilon_\mathbf{q})^{1/2}}
+    \\&\quad\qquad\times
+    \sum_{r} \left(
+    u^{r}(q)\hat{a}_{r\mathbf{q}}e^{-iq\cdot x}
+    +
+    v^{r}(q)\hat{b}^\dag_{r\mathbf{q}}e^{iq\cdot x}
+    \right)
+    \hat{a}^\dag_{sp}
+    \ket{0}
+    \\&=
+    (2\pi)^{3/2}(2\epsilon_\mathbf{p})^{1/2}
+    \int\frac{d^3q}{(2\pi)^{3/2}}
+    \frac{1}{(2\epsilon_\mathbf{q})^{1/2}}
+    \sum_{r} 
+    u^{r}(q)e^{-iq\cdot x}
+    \delta(\mathbf{q-p})\delta_{rs}
+    \\&=
+    u^{s}(p)e^{-ip\cdot x}.
+\end{aligned}
+\end{equation}
+%
+The second is
+
+\begin{equation}
+    \contraction[1ex]
+        {}{\hat{A}_\mu(x)}{}{\hat{A}_\nu(y)}
+    \hat{A}_\mu(x)\hat{A}_\nu(y)
+    =
+    \bra{0}
+    T[\hat{A}_\mu(x)\hat{A}_\nu(y)]
+    \ket{0}
+    \equiv
+    D_{0\mu\nu}(x, y),
+\end{equation}
+%
+which we recognize as the free photon propagator between points $x$ and $y$. The propagator can be found in momentum space using Feynman's path integral formulation (see Lancaster and Blundell \cite{Lancaster2014}).  Here, we simply state the result:
+
+\begin{equation}
+    \tilde{D}_{0\mu\nu}(k)
+    =
+    \frac{-ig_{\mu\nu}}{k^2 + i\eta},
+\end{equation}
+%
+where $\eta \ll 1$ is a positive real number.  We drop the infinitesimal in section \ref{sec:ee} since $q^2$ is always nonzero.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lab frame $p^z_3$}
+\label{app:p3z}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Given conservation of 4-momentum for our two particle system, we can write
+
+\begin{equation}
+    p_1 + p_2 = p_3 + p_4.
+\end{equation}
+%
+This means that of the six components needed to specify the two outgoing 3-momenta of the outgoing particles, only two are independent.  We choose the independent components to be $p^x_3$ and $p^y_3$.  Thus, we wish to find $p^z_3$ as a function of $p_1$, $p_2$, $p^x_3$, and $p^y_3$.  From this $p_4 = p_1 + p_2 - p_3$ is easily obtained, and we have all six components of momenta needed to obtain a differential cross section from equation (\ref{eq:ampCode}).  We start by setting the $z$-direction parallel to the 3-momentum of the incident particle.  This means that
+
+\begin{equation}
+\label{eq:conservation}
+    \begin{aligned}
+        &p^x_4 = p^x_2 - p^x_3
+        \\&p^y_4 = p^y_2 - p^y_3
+        \\&p^z_4 = p^z_1 + p^z_2 - p^z_3
+        \\&\epsilon_4 = \epsilon_1 + \Delta\epsilon
+                    %   + (\epsilon_2 + \epsilon_{n\mathbf{k}})
+                    %   - (\epsilon_3 + \epsilon_{n'\mathbf{k'}})
+    \end{aligned}
+\end{equation}
+%
+where
+
+\begin{equation}
+    \epsilon_i = \epsilon_{\mathbf{p}_i} = \sqrt{\mathbf{p}_i^2 + m^2}
+    \qquad\text{and}\qquad
+    \Delta\epsilon = \epsilon_{n\mathbf{k}} - \epsilon_{n'\mathbf{k'}},
+\end{equation}
+%
+and $\epsilon_{n\mathbf{k}}$ and $\epsilon_{n'\mathbf{k'}}$ are the eigenvalues of the excited electron and hole states.  Squaring the last line in (\ref{eq:conservation}) and subtracting $m^2$ gives
+
+\begin{equation}
+\label{eq:p41}
+    p^2_4
+    =
+    p^2_1 + 2\gamma m\Delta\epsilon + \mathcal{O}(\Delta\epsilon^2).
+\end{equation}
+%
+We can ignore terms of order $\mathcal{O}(\Delta\epsilon^2)$ since $\delta\epsilon\ll m$. 
+Meanwhile, squaring and adding the first three equations in (\ref{eq:conservation}) tells us that
+
+\begin{equation}
+\label{eq:p42}
+   \mathbf{p}_4^2
+   =
+   \mathbf{p}_1^2 + \mathbf{p}_2^2 + \mathbf{p}_3^2
+   + 2\left[
+%   p^z_1p^z_2 - p^x_2p^x_3 - p^y_2p^y_3 - (p^z_1 + p^z_2)p^z_3
+   p^z_1p^z_2 - \mathbf{p}^{\perp}_2 \cdot \mathbf{p}^{\perp}_3 - (p^z_1 + p^z_2)p^z_3
+   \right]
+\end{equation}
+%
+Subtracting equation (\ref{eq:p42}) from equation (\ref{eq:p41}) then gives us
+
+\begin{equation}
+\label{eq:eliminatep4}
+\begin{aligned}
+    0
+    &\sim
+    p^2_2 + p^2_3
+    +
+    2\left[
+    p^z_1p^z_2 - \mathbf{p}^{\perp}_2 \cdot \mathbf{p}^{\perp}_3 - (p^z_1 + p^z_2)p^z_3
+    \right]
+    -
+    2\gamma m\Delta\epsilon.
+\end{aligned}
+\end{equation}
+%
+Equation (\ref{eq:eliminatep4}) can then be solved for $p^3_z$, so that
+
+\begin{equation}
+\label{eq:p3z}
+    p^3_z
+    \sim
+    p_1^z + p_2^z
+    \pm
+    \sqrt{
+    \left(p_1^z\right)^2
+    -
+    \left(\mathbf{p}_2^\perp)^2 - (\mathbf{p}_3^\perp\right)^2
+    +
+    2\gamma m\Delta\epsilon.
+    }.
+\end{equation}
+%
+We choose the $-$ from $\pm$ as, again, we impose that $\mathbf{p}_3$ is a component of the outgoing crystal electron state, whose $z$-momentum is much smaller than that of the beam electron.
+
+
+\end{document}
