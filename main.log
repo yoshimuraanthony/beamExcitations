@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.12.4)  5 DEC 2020 15:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.12.4)  5 DEC 2020 16:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2131,175 +2131,172 @@ LaTeX Warning: Citation 'Peskin1995' on page 3 undefined on input line 123.
 LaTeX Warning: Citation 'Lancaster2014' on page 3 undefined on input line 123.
 
 
-LaTeX Warning: Citation 'Meyer2012' on page 3 undefined on input line 164.
+LaTeX Warning: Citation 'Meyer2012' on page 3 undefined on input line 165.
 
 
-LaTeX Warning: Citation 'Susi2016' on page 3 undefined on input line 164.
+LaTeX Warning: Citation 'Susi2016' on page 3 undefined on input line 165.
 
 
-LaTeX Warning: Citation 'Yoshimura2018' on page 3 undefined on input line 164.
+LaTeX Warning: Citation 'Yoshimura2018' on page 3 undefined on input line 165.
 
 [3]
-<images/tu.png, id=26, 1606.0pt x 434.62375pt>
+<images/tu.png, id=27, 1606.0pt x 434.62375pt>
 File: images/tu.png Graphic file (type png)
 <use images/tu.png>
-Package pdftex.def Info: images/tu.png  used on input line 189.
+Package pdftex.def Info: images/tu.png  used on input line 190.
 (pdftex.def)             Requested size: 306.42528pt x 82.92421pt.
 
 
-LaTeX Warning: Reference `app:M' on page 4 undefined on input line 246.
+LaTeX Warning: Reference `app:M' on page 4 undefined on input line 247.
 
 [4 <./images/tu.png>]
 
-LaTeX Warning: Reference `eq:identity' on page 5 undefined on input line 305.
+LaTeX Warning: Reference `eq:identity' on page 5 undefined on input line 306.
 
 
 LaTeX Warning: Reference `eq:normalization' on page 5 undefined on input line 3
-42.
+43.
 
 [5] [6]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 577.
+               Default added (so using `tbp') on input line 578.
 
 <images/pVsEb.pdf, id=44, 462.52798pt x 346.89601pt>
 File: images/pVsEb.pdf Graphic file (type pdf)
 <use images/pVsEb.pdf>
-Package pdftex.def Info: images/pVsEb.pdf  used on input line 599.
+Package pdftex.def Info: images/pVsEb.pdf  used on input line 600.
 (pdftex.def)             Requested size: 268.11992pt x 201.09924pt.
 
-LaTeX Warning: Citation 'Kretschmer2020' on page 7 undefined on input line 609.
+LaTeX Warning: Citation 'Kretschmer2020' on page 7 undefined on input line 610.
 
 
 
-LaTeX Warning: Citation 'Li2016b' on page 7 undefined on input line 610.
+LaTeX Warning: Citation 'Li2016b' on page 7 undefined on input line 611.
 
 
-LaTeX Warning: Citation 'Korn2011' on page 7 undefined on input line 610.
+LaTeX Warning: Citation 'Korn2011' on page 7 undefined on input line 611.
 
 
-LaTeX Warning: Citation 'Lagarde2014' on page 7 undefined on input line 610.
+LaTeX Warning: Citation 'Lagarde2014' on page 7 undefined on input line 611.
 
 
-LaTeX Warning: Citation 'Palummo2015' on page 7 undefined on input line 610.
+LaTeX Warning: Citation 'Palummo2015' on page 7 undefined on input line 611.
 
 
-LaTeX Warning: Citation 'Shi2013' on page 7 undefined on input line 610.
+LaTeX Warning: Citation 'Shi2013' on page 7 undefined on input line 611.
 
 
-LaTeX Warning: Citation 'Yoshimura2018' on page 7 undefined on input line 610.
+LaTeX Warning: Citation 'Yoshimura2018' on page 7 undefined on input line 611.
 
 [7]
 
-LaTeX Warning: Citation 'Kretschmer2020' on page 8 undefined on input line 624.
+LaTeX Warning: Citation 'Kretschmer2020' on page 8 undefined on input line 625.
 
 
 
-LaTeX Warning: Citation 'Cretu2015' on page 8 undefined on input line 626.
+LaTeX Warning: Citation 'Cretu2015' on page 8 undefined on input line 627.
 
 [8 <./images/pVsEb.pdf>]
 <images/totCrosshBN.pdf, id=92, 433.62pt x 361.35pt>
 File: images/totCrosshBN.pdf Graphic file (type pdf)
 <use images/totCrosshBN.pdf>
-Package pdftex.def Info: images/totCrosshBN.pdf  used on input line 638.
+Package pdftex.def Info: images/totCrosshBN.pdf  used on input line 639.
 (pdftex.def)             Requested size: 268.11992pt x 223.44472pt.
 
 
-LaTeX Warning: Citation 'Shishkin2006a' on page 9 undefined on input line 655.
+LaTeX Warning: Citation 'Shishkin2006a' on page 9 undefined on input line 656.
 
 
-LaTeX Warning: Citation 'Gajdos2006' on page 9 undefined on input line 655.
+LaTeX Warning: Citation 'Gajdos2006' on page 9 undefined on input line 656.
 
 
-LaTeX Warning: Citation 'Paier2005' on page 9 undefined on input line 655.
+LaTeX Warning: Citation 'Paier2005' on page 9 undefined on input line 656.
 
 [9 <./images/totCrosshBN.pdf>]
 
-LaTeX Warning: Citation 'Kretschmer2020' on page 10 undefined on input line 661
+LaTeX Warning: Citation 'Kretschmer2020' on page 10 undefined on input line 662
 .
 
 
-LaTeX Warning: Citation 'Lagarde2014' on page 10 undefined on input line 663.
+LaTeX Warning: Citation 'Lagarde2014' on page 10 undefined on input line 664.
 
 
-LaTeX Warning: Citation 'Kozawa2014' on page 10 undefined on input line 663.
+LaTeX Warning: Citation 'Kozawa2014' on page 10 undefined on input line 664.
 
 
-LaTeX Warning: Citation 'Nie2015' on page 10 undefined on input line 663.
+LaTeX Warning: Citation 'Nie2015' on page 10 undefined on input line 664.
 
 
-LaTeX Warning: Citation 'Shi2013a' on page 10 undefined on input line 663.
+LaTeX Warning: Citation 'Shi2013a' on page 10 undefined on input line 664.
 
 
-LaTeX Warning: Citation 'Hohenberg1964' on page 10 undefined on input line 672.
-
-
-
-LaTeX Warning: Citation 'Kohn1965' on page 10 undefined on input line 672.
-
-
-LaTeX Warning: Citation 'Kresse1996' on page 10 undefined on input line 672.
-
-
-LaTeX Warning: Citation 'Kresse1996a' on page 10 undefined on input line 672.
-
-
-LaTeX Warning: Citation 'Blochl1994' on page 10 undefined on input line 672.
-
-
-LaTeX Warning: Citation 'Giannozzi2009' on page 10 undefined on input line 672.
+LaTeX Warning: Citation 'Hohenberg1964' on page 10 undefined on input line 673.
 
 
 
-LaTeX Warning: Citation 'Hamann2013' on page 10 undefined on input line 672.
+LaTeX Warning: Citation 'Kohn1965' on page 10 undefined on input line 673.
 
 
-LaTeX Warning: Citation 'Schlipf2015' on page 10 undefined on input line 672.
+LaTeX Warning: Citation 'Kresse1996' on page 10 undefined on input line 673.
 
 
-Overfull \hbox (1.03163pt too wide) in paragraph at lines 672--673
+LaTeX Warning: Citation 'Kresse1996a' on page 10 undefined on input line 673.
+
+
+LaTeX Warning: Citation 'Blochl1994' on page 10 undefined on input line 673.
+
+
+LaTeX Warning: Citation 'Giannozzi2009' on page 10 undefined on input line 673.
+
+
+
+LaTeX Warning: Citation 'Hamann2013' on page 10 undefined on input line 673.
+
+
+LaTeX Warning: Citation 'Schlipf2015' on page 10 undefined on input line 673.
+
+
+Overfull \hbox (1.03163pt too wide) in paragraph at lines 673--674
 \OT1/lmr/m/n/10 plane wave co-ef-fi-cients $\OML/lmm/m/it/10 C[]$ \OT1/lmr/m/n/
 10 were ob-tained with Quan-tum ESPRESSO[[]]
  []
 
 
-Overfull \hbox (31.23286pt too wide) in paragraph at lines 672--673
+Overfull \hbox (31.23286pt too wide) in paragraph at lines 673--674
 \OT1/lmr/m/n/10 uti-liz-ing op-ti-mized norm-conserving Van-der-bilt pseudopote
 ntials[[], []]. 
  []
 
 
-LaTeX Warning: Reference `eq:interband' on page 10 undefined on input line 674.
+LaTeX Warning: Reference `eq:interband' on page 10 undefined on input line 675.
 
 
 
-LaTeX Warning: Citation 'Hamann2013' on page 10 undefined on input line 674.
+LaTeX Warning: Citation 'Hamann2013' on page 10 undefined on input line 675.
 
 
-LaTeX Warning: Citation 'Schlipf2015' on page 10 undefined on input line 674.
+LaTeX Warning: Citation 'Schlipf2015' on page 10 undefined on input line 675.
 
 
-LaTeX Warning: Citation 'Blochl1994' on page 10 undefined on input line 674.
+LaTeX Warning: Citation 'Blochl1994' on page 10 undefined on input line 675.
 
 
-LaTeX Warning: Citation 'Shishkin2006a' on page 10 undefined on input line 674.
+LaTeX Warning: Citation 'Shishkin2006a' on page 10 undefined on input line 675.
 
 
 
-LaTeX Warning: Citation 'Gajdos2006' on page 10 undefined on input line 674.
+LaTeX Warning: Citation 'Gajdos2006' on page 10 undefined on input line 675.
 
 
-LaTeX Warning: Citation 'Paier2005' on page 10 undefined on input line 674.
+LaTeX Warning: Citation 'Paier2005' on page 10 undefined on input line 675.
 
 
-LaTeX Warning: Empty bibliography on input line 684.
+LaTeX Warning: Empty bibliography on input line 685.
 
 [10] (./main.aux)
 
 LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 
 Package biblatex Warning: Please (re)run Biber on the file:
@@ -2313,7 +2310,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  18726 strings out of 492982
  343440 string characters out of 6134896
- 742665 words of memory out of 5000000
+ 742664 words of memory out of 5000000
  22112 multiletter control sequences out of 15000+600000
  594861 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2334,7 +2331,7 @@ fb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/t
 ype1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmsy7.pfb>
-Output written on main.pdf (10 pages, 437548 bytes).
+Output written on main.pdf (10 pages, 437596 bytes).
 PDF statistics:
  204 PDF objects out of 1000 (max. 8388607)
  101 compressed objects within 2 object streams
